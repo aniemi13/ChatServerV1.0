@@ -12,7 +12,7 @@ public class Server {
 	
 	public Server() {
 		this.reader = new BufferedReader(new InputStreamReader(System.in));
-		this.mainWhileServer = new MainWhileServer(this, 6666);
+		this.mainWhileServer = new MainWhileServer(this, 6666, clientThreadManager);
 		this.mainWhileServer.start();
 		this.clientThreadManager = new ClientThreadManager();
 	}
