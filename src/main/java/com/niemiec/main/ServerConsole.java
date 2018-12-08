@@ -4,17 +4,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Server {
+public class ServerConsole {
 	private BufferedReader reader;
 	private MainWhileServer mainWhileServer;
-	private ClientThreadManager clientThreadManager;
 	private String line = null;
 	
-	public Server() {
+	public ServerConsole() {
 		this.reader = new BufferedReader(new InputStreamReader(System.in));
-		this.mainWhileServer = new MainWhileServer(this, 6666, clientThreadManager);
+		this.mainWhileServer = new MainWhileServer(6666);
 		this.mainWhileServer.start();
-		this.clientThreadManager = new ClientThreadManager();
 	}
 
 	private void start() {
@@ -63,12 +61,12 @@ public class Server {
 		
 	}
 	
-	public void log(String info) {
+	public static void log(String info) {
 		System.out.println(info);
 	}
 
 	public static void main(String[] args) {
-		Server server = new Server();
+		ServerConsole server = new ServerConsole();
 		server.start();
 	}
 
