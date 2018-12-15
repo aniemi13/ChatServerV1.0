@@ -4,6 +4,7 @@ import com.niemiec.objects.ClientThread;
 
 public class MessagesManagement {
 	private final String CHECK_NICK = "cn";
+	private final String READY_TO_WORK = "rw";
 	private final String NICK_EXIST = "exist";
 	private final String PRIVATE_MESSAGE = "pm";
 	private final String GROUP_MESSAGE = "gm";
@@ -30,7 +31,9 @@ public class MessagesManagement {
 		} else if (typeOfMessage.equals(PRIVATE_MESSAGE)) {
 			sendPrivateMessage();
 		} else if (typeOfMessage.equals(CHECK_NICK)) {
-			checkNick();		
+			checkNick();
+		} else if (typeOfMessage.equals(READY_TO_WORK)) {
+			clientThreadManager.sendAllClientThreadNickList();
 		} else if (typeOfMessage.equals(EXIT)) {
 			deleteClientThread();
 			return false;
@@ -54,23 +57,21 @@ public class MessagesManagement {
 		String m;
 		if (clientThreadManager.add(senderNick, clientThread)) {
 			m = "/" + CHECK_NICK + "/" + "notexist";
-			sendTheObject(m);
-			clientThreadManager.sendAllClientThreadNickList();
 		} else {
 			m = "/" + CHECK_NICK + "/" + NICK_EXIST;
-			sendTheObject(m);
 		}
+		sendTheObject(m);
 	}
 
 	private void separateMessage() {
 		getTypeOfMessageFromMessage();
 
 		if (typeOfMessage.equals(PRIVATE_MESSAGE)) {
-			getNickAndInterlocutorNickAndRightMessageFromMessage();
+			getInterlocutorNickFromMessage();
 		}
 	}
 
-	private void getNickAndInterlocutorNickAndRightMessageFromMessage() {
+	private void getInterlocutorNickFromMessage() {
 		String[] s = message.split("/", 5);
 		receiveNick = s[3];
 	}
