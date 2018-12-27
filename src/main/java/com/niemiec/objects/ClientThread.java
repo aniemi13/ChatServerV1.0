@@ -10,10 +10,8 @@ public class ClientThread extends Thread {
 	private String nick;
 	private InputOutputStream inputOutputStream;
 	private MessagesManagement messagesManagement;
-	Socket socket;
 
 	public ClientThread(Socket socket, ClientThreadManager clientThreadManager) {
-		this.socket = socket;
 		this.nick = null;
 		this.inputOutputStream = new InputOutputStream(socket);
 		this.messagesManagement = new MessagesManagement(this, clientThreadManager);
