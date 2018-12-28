@@ -60,7 +60,7 @@ public class MessagesManagement {
 		} else {
 			m = "/" + CHECK_NICK + "/" + NICK_EXIST;
 		}
-		sendTheObject(m);		
+		sendTheObject(m);
 	}
 
 	private void separateMessage() {
